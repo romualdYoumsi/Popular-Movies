@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.udacity.ry.popularmovies.pages.details.DetailsActivity"
+    tools:showIn="@layout/activity_details">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white">
+
+        <include layout="@layout/cardview_movie_thumbnail" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/content_details_padding"
+            android:background="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/original_title"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingStart="@dimen/tv_label_padding_hor"
+                    android:paddingEnd="@dimen/tv_label_padding_hor"
+                    android:paddingTop="@dimen/tv_label_padding_ver"
+                    android:paddingBottom="@dimen/tv_label_padding_ver"
+                    android:background="@color/colorGray2"/>
+
+                <TextView
+                    android:id="@+id/original_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    tools:text="Avengers: Infinity war" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/content_block_margin_top">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/genres"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingStart="@dimen/tv_label_padding_hor"
+                    android:paddingEnd="@dimen/tv_label_padding_hor"
+                    android:paddingTop="@dimen/tv_label_padding_ver"
+                    android:paddingBottom="@dimen/tv_label_padding_ver"
+                    android:background="@color/colorGray2" />
+
+                <TextView
+                    android:id="@+id/genres_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Adventure, Science Fiction, Fantasy, Action" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/content_block_margin_top">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/overview"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingStart="@dimen/tv_label_padding_hor"
+                    android:paddingEnd="@dimen/tv_label_padding_hor"
+                    android:paddingTop="@dimen/tv_label_padding_ver"
+                    android:paddingBottom="@dimen/tv_label_padding_ver"
+                    android:background="@color/colorGray2" />
+
+                <TextView
+                    android:id="@+id/overview_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Lorem ipsum dolor sit amum" />
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/content_block_margin_top">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_alignParentStart="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vote_count"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingStart="@dimen/tv_label_padding_hor"
+                        android:paddingEnd="@dimen/tv_label_padding_hor"
+                        android:paddingTop="@dimen/tv_label_padding_ver"
+                        android:paddingBottom="@dimen/tv_label_padding_ver" />
+
+                    <TextView
+                        android:id="@+id/vote_count_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="1500"
+                        android:textSize="36sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_alignParentEnd="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vote_average"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingStart="@dimen/tv_label_padding_hor"
+                        android:paddingEnd="@dimen/tv_label_padding_hor"
+                        android:paddingTop="@dimen/tv_label_padding_ver"
+                        android:paddingBottom="@dimen/tv_label_padding_ver" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/vote_average_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="8.3"
+                            android:textSize="36sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" / 10"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/content_block_margin_top">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_page"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingStart="@dimen/tv_label_padding_hor"
+                    android:paddingEnd="@dimen/tv_label_padding_hor"
+                    android:paddingTop="@dimen/tv_label_padding_ver"
+                    android:paddingBottom="@dimen/tv_label_padding_ver"
+                    android:background="@color/colorGray2" />
+
+                <TextView
+                    android:id="@+id/homepage_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="wwww.udacity.com" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/content_block_margin_top">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/original_language"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingStart="@dimen/tv_label_padding_hor"
+                    android:paddingEnd="@dimen/tv_label_padding_hor"
+                    android:paddingTop="@dimen/tv_label_padding_ver"
+                    android:paddingBottom="@dimen/tv_label_padding_ver"
+                    android:background="@color/colorGray2" />
+
+                <TextView
+                    android:id="@+id/original_language_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    tools:text="en" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/content_block_margin_top">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/popularity"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingStart="@dimen/tv_label_padding_hor"
+                    android:paddingEnd="@dimen/tv_label_padding_hor"
+                    android:paddingTop="@dimen/tv_label_padding_ver"
+                    android:paddingBottom="@dimen/tv_label_padding_ver"
+                    android:background="@color/colorGray2" />
+
+                <TextView
+                    android:id="@+id/popularity_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    tools:text="290.701" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/content_block_margin_top">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/production_company_ies"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingStart="@dimen/tv_label_padding_hor"
+                    android:paddingEnd="@dimen/tv_label_padding_hor"
+                    android:paddingTop="@dimen/tv_label_padding_ver"
+                    android:paddingBottom="@dimen/tv_label_padding_ver"
+                    android:background="@color/colorGray2" />
+
+                <TextView
+                    android:id="@+id/production_companies_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    tools:text="United States of America" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/content_block_margin_top">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/production_country_ies"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingStart="@dimen/tv_label_padding_hor"
+                    android:paddingEnd="@dimen/tv_label_padding_hor"
+                    android:paddingTop="@dimen/tv_label_padding_ver"
+                    android:paddingBottom="@dimen/tv_label_padding_ver"
+                    android:background="@color/colorGray2" />
+
+                <TextView
+                    android:id="@+id/production_countries_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    tools:text="United States of America" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/content_block_margin_top">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/release_date"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingStart="@dimen/tv_label_padding_hor"
+                    android:paddingEnd="@dimen/tv_label_padding_hor"
+                    android:paddingTop="@dimen/tv_label_padding_ver"
+                    android:paddingBottom="@dimen/tv_label_padding_ver"
+                    android:background="@color/colorGray2" />
+
+                <TextView
+                    android:id="@+id/release_date_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    tools:text="Mardi 25 avril 2018" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/content_block_margin_top">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spoken_language_s"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingStart="@dimen/tv_label_padding_hor"
+                    android:paddingEnd="@dimen/tv_label_padding_hor"
+                    android:paddingTop="@dimen/tv_label_padding_ver"
+                    android:paddingBottom="@dimen/tv_label_padding_ver"
+                    android:background="@color/colorGray2" />
+
+                <TextView
+                    android:id="@+id/spoken_language_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    tools:text="en" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

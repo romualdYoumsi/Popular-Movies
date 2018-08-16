@@ -1,0 +1,36 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.main.fragment.MainFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="@string/hello_blank_fragment" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Welcome to RY (Romuald YOUMSI) Popular Movies"-->
+        <!--android:padding="16dp"/>-->
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <GridView
+            android:id="@+id/grid"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:columnWidth="150dp"
+            android:paddingBottom="4dp"
+            android:gravity="center"
+            android:listSelector="#00000000"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth" />
+    </LinearLayout>
+</FrameLayout>
