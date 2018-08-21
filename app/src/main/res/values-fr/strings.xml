@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings">Paramètres</string>
+    <!-- Label for the sort order preference -->
+    <string name="pref_sort_order_label">Ordre de tri</string>
+
+    <!-- Label for the language preference -->
+    <string name="pref_language_label">La langue</string>
+
+    <!-- Label for sort order option in preference -->
+    <string name="pref_sort_order_label_most_popular">Le plus populaire</string>
+
+    <!-- Label for imperial option in temperature unit preference -->
+    <string name="pref_sort_order_label_top_rated">Top évalué</string>
+
+    <!--Translateable strings-->
+    <string name="original_title">Titre original</string>
+    <string name="release_date">Date de sortie</string>
+    <string name="vote_average">Moyenne de vote</string>
+    <string name="genres">Genres</string>
+    <string name="overview">Vue d\'ensemble</string>
+    <string name="vote_count">Nombre de votes</string>
+    <string name="home_page">Page d\'accueil</string>
+    <string name="original_language">Langue originale</string>
+    <string name="popularity">Popularité</string>
+    <string name="production_company_ies">Société(s) de production</string>
+    <string name="production_country_ies">Pays de production</string>
+    <string name="spoken_language_s">Langue(s) parlée(s)</string>
+    <string name="connection_error">Impossible de recupérer des films sur le serveur. S\'il vous plait, vérifiez votre connexion internet.</string>
+</resources>

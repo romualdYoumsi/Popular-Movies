@@ -2,14 +2,19 @@ package com.udacity.ry.popularmovies.pages.settings.fragment;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.Log;
 
 import com.udacity.ry.popularmovies.R;
+
+import java.util.Locale;
 
 /**
  * Created by netserve on 04/08/2018.
@@ -17,6 +22,8 @@ import com.udacity.ry.popularmovies.R;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements
         SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private static final String TAG = SettingsFragment.class.getSimpleName();
 
     private void setPreferenceSummary(Preference preference, Object value) {
         String stringValue = value.toString();
@@ -29,6 +36,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
             if (prefIndex >= 0) {
                 preference.setSummary(listPreference.getEntries()[prefIndex]);
             }
+
         } else {
             // For other preferences, set the summary to the value's simple string representation.
             preference.setSummary(stringValue);
@@ -69,6 +77,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Log.e(TAG, "onConfigurationChanged: ");
+    }
+
+    @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Activity activity = getActivity();
 
@@ -83,9 +97,25 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         }*/
         Preference preference = findPreference(key);
         if (null != preference) {
-            if (!(preference instanceof CheckBoxPreference)) {
+//            if (!(preference instanceof ListPreference)) {
                 setPreferenceSummary(preference, sharedPreferences.getString(key, ""));
-            }
+
+                //  Application language configuration
+                Locale locale = new Locale(sharedPreferences.getString(key, getString(R.string.pref_language_en)));
+                Configuration config = getResources().getConfiguration();
+                config.locale = locale;
+//            if (Build.VERSION.SDK_INT >= 17) {
+//                config.setLocale(locale);
+//                getContext().createConfigurationContext(config);
+//            } else {
+//                config.locale = locale;
+//                getContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+//            }
+                getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
+                getActivity().finish();
+                getActivity().startActivity(getActivity().getIntent());
+//            }
         }
     }
 }

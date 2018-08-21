@@ -4,6 +4,7 @@
 
     <!-- request internet permission -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".pages.main.MainActivity">
+        <activity android:name=".pages.main.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,12 +23,13 @@
         </activity>
         <activity
             android:name=".pages.settings.SettingsActivity"
-            android:label="@string/settings" />
+            android:configChanges="keyboardHidden|orientation|screenSize|locale" />
         <activity
             android:name=".pages.details.DetailsActivity"
             android:label="@string/title_activity_details"
             android:parentActivityName=".pages.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.udacity.ry.popularmovies.pages.main.MainActivity" />

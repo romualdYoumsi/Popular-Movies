@@ -46,7 +46,7 @@ public class RYMovieAdapter extends ArrayAdapter<RYMovie> implements AdapterView
         cardMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e(TAG, "onItemClick: position="+position+" title="+ryMovie.getTitle()+" Vote_average="+ryMovie.getVote_average()+" Release_date="+ryMovie.getRelease_date());
+//                Log.e(TAG, "onItemClick: position="+position+" title="+ryMovie.getTitle()+" Vote_average="+ryMovie.getVote_average()+" Release_date="+ryMovie.getRelease_date());
 
                 Intent i = new Intent(getContext(), DetailsActivity.class);
                 //If you wanna send any data to nextActicity.class you can use
@@ -76,7 +76,7 @@ public class RYMovieAdapter extends ArrayAdapter<RYMovie> implements AdapterView
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         RYMovie item = getItem(position);
-        Log.e(TAG, "onItemClick: position="+position+" title="+item.getTitle()+" Vote_average="+item.getVote_average()+" Release_date="+item.getRelease_date());
+//        Log.e(TAG, "onItemClick: position="+position+" title="+item.getTitle()+" Vote_average="+item.getVote_average()+" Release_date="+item.getRelease_date());
 
         Intent i = new Intent(getContext(), DetailsActivity.class);
         //If you wanna send any data to nextActicity.class you can use

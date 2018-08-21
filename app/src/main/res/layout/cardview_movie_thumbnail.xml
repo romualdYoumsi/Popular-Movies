@@ -138,6 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="30sp"
                 android:textColor="@android:color/white"
                 tools:text="April, 25 2018" />
 
@@ -151,7 +152,7 @@
                 android:isIndicator="true"
                 android:numStars="5"
                 android:progressTint="@color/color_rating"
-                android:rating="2.3"
+                android:rating="0"
                 android:secondaryProgressTint="@android:color/transparent"
                 android:stepSize="0.1"
                 tools:layout_height="wrap_content" />
@@ -173,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGray"
                     android:text=" / 10"
-                    android:textSize="12sp"/>
+                    android:textSize="10sp"/>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

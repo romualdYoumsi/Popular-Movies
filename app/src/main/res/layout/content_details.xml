@@ -45,6 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
+                    android:textStyle="bold"
                     tools:text="Avengers: Infinity war" />
             </LinearLayout>
 
@@ -99,13 +100,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/content_block_margin_top">
+                android:layout_marginTop="@dimen/content_block_margin_top"
+                android:gravity="center">
 
                 <LinearLayout
+                    android:id="@+id/layout_vote_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_alignParentStart="true">
+                    android:layout_marginEnd="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -129,7 +132,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_alignParentEnd="true">
+                    android:layout_toEndOf="@+id/layout_vote_count"
+                    android:layout_marginStart="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -156,7 +160,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=" / 10"
-                            android:textSize="12sp"/>
+                            android:textSize="10sp"/>
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
@@ -167,22 +171,38 @@
                 android:orientation="vertical"
                 android:layout_marginTop="@dimen/content_block_margin_top">
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_page"
-                    android:textColor="@color/colorPrimary"
-                    android:paddingStart="@dimen/tv_label_padding_hor"
-                    android:paddingEnd="@dimen/tv_label_padding_hor"
-                    android:paddingTop="@dimen/tv_label_padding_ver"
-                    android:paddingBottom="@dimen/tv_label_padding_ver"
-                    android:background="@color/colorGray2" />
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_page"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingStart="@dimen/tv_label_padding_hor"
+                        android:paddingEnd="@dimen/tv_label_padding_hor"
+                        android:paddingTop="@dimen/tv_label_padding_ver"
+                        android:paddingBottom="@dimen/tv_label_padding_ver"
+                        android:background="@color/colorGray2" />
+
+                    <ImageButton
+                        android:id="@+id/homepage_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_link_black"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/tv_label_padding_hor"
+                        android:layout_centerVertical="true"
+                        android:visibility="visible"/>
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/homepage_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="wwww.udacity.com" />
+                    tools:text="wwww.udacity.com"
+                    android:textColor="@android:color/holo_blue_light"/>
             </LinearLayout>
 
             <LinearLayout
@@ -206,7 +226,6 @@
                     android:id="@+id/original_language_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="italic"
                     tools:text="en" />
             </LinearLayout>
 
@@ -231,7 +250,6 @@
                     android:id="@+id/popularity_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="italic"
                     tools:text="290.701" />
             </LinearLayout>
 
@@ -256,7 +274,6 @@
                     android:id="@+id/production_companies_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="italic"
                     tools:text="United States of America" />
             </LinearLayout>
 
@@ -281,7 +298,6 @@
                     android:id="@+id/production_countries_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="italic"
                     tools:text="United States of America" />
             </LinearLayout>
 
@@ -306,7 +322,6 @@
                     android:id="@+id/release_date_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="italic"
                     tools:text="Mardi 25 avril 2018" />
             </LinearLayout>
 
@@ -314,7 +329,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="@dimen/content_block_margin_top">
+                android:layout_marginTop="@dimen/content_block_margin_top"
+                android:layout_marginBottom="@dimen/content_block_margin_top">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -331,7 +347,6 @@
                     android:id="@+id/spoken_language_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="italic"
                     tools:text="en" />
             </LinearLayout>
         </LinearLayout>
