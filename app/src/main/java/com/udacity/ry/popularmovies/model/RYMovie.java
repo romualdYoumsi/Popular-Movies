@@ -109,4 +109,19 @@ public class RYMovie implements Parcelable {
             return new RYMovie[size];
         }
     };
+
+    /*
+    // somewhere inside an Activity
+    MyParcelable dataToSend = new MyParcelable();
+    Intent i = new Intent(this, NewActivity.class);
+    i.putExtra("myDataKey", dataToSend); // using the (String name, Parcelable value) overload!
+    startActivity(i); // dataToSend is now passed to the new Activity*/
+
+    /*
+    public class NewActivity extends Activity {
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            MyParcelable object = (MyParcelable) getIntent().getParcelableExtra("myDataKey");
+        }
+    }*/
 }

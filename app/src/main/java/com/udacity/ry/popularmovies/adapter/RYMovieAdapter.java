@@ -43,18 +43,6 @@ public class RYMovieAdapter extends ArrayAdapter<RYMovie> {
         }
 
         RelativeLayout cardMovie = (RelativeLayout) convertView.findViewById(R.id.card_view_content);
-        /*cardMovie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Log.e(TAG, "onItemClick: position="+position+" title="+ryMovie.getTitle()+" Vote_average="+ryMovie.getVote_average()+" Release_date="+ryMovie.getRelease_date());
-
-                Intent i = new Intent(getContext(), DetailsActivity.class);
-                //If you wanna send any data to nextActicity.class you can use
-                i.putExtra("movie_id", ryMovie.getId());
-
-                getContext().startActivity(i);
-            }
-        });*/
 
 //        set the value of views
         ImageView posterView = (ImageView) convertView.findViewById(R.id.poster_iv);
@@ -73,16 +61,4 @@ public class RYMovieAdapter extends ArrayAdapter<RYMovie> {
         return convertView;
     }
 
-    /*
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        RYMovie item = getItem(position);
-//        Log.e(TAG, "onItemClick: position="+position+" title="+item.getTitle()+" Vote_average="+item.getVote_average()+" Release_date="+item.getRelease_date());
-
-        Intent i = new Intent(getContext(), DetailsActivity.class);
-        //If you wanna send any data to nextActicity.class you can use
-        i.putExtra("movie_id", item.getId());
-
-        getContext().startActivity(i);
-    }*/
 }

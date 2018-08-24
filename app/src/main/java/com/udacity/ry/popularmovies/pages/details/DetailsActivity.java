@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.ry.popularmovies.R;
+import com.udacity.ry.popularmovies.model.RYMovie;
 import com.udacity.ry.popularmovies.pages.settings.SettingsActivity;
 import com.udacity.ry.popularmovies.remote.ApiUtils;
 import com.udacity.ry.popularmovies.remote.model.Movie;
@@ -45,7 +46,7 @@ public class DetailsActivity extends AppCompatActivity {
             , productionCompagniesTV, productionCountriesTV, releaseDate2TV, spokenLanguagesTV, voteCountTV, voteAverage2TV;
     private RatingBar voteAverageRB;
 
-    private long movieId;
+    private RYMovie movieItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.e(TAG, "onCreate: ");
@@ -77,22 +78,18 @@ public class DetailsActivity extends AppCompatActivity {
 
 
         if (savedInstanceState == null) {
-//            Log.e(TAG, "onCreate: savedInstanceState null");
-            Bundle extras = getIntent().getExtras();
-            if (extras == null) {
-//                Log.e(TAG, "onCreate: extras null");
-                finish();
-            } else {
-//                Log.e(TAG, "onCreate: extras not null");
-                movieId = extras.getLong("movie_id");
+                movieItem = (RYMovie) getIntent().getParcelableExtra("movie_item");
 
-                fetchMovieDetailsData(movieId);
-            }
+                if (movieItem == null) {
+                    finish();
+                }
+                fetchMovieDetailsData(movieItem.getId());
+
         } else {
 //            Log.e(TAG, "onCreate: savedInstanceState not null");
-            movieId = savedInstanceState.getLong("movie_id");
+            movieItem = (RYMovie) savedInstanceState.getParcelable("movie_item");
 
-            fetchMovieDetailsData(movieId);
+            fetchMovieDetailsData(movieItem.getId());
         }
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -142,7 +139,7 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         Log.e(TAG, "onSaveInstanceState: ");
 
-        outState.putLong("movie_id", movieId);
+        outState.putParcelable("movie_item", movieItem);
         super.onSaveInstanceState(outState);
     }
 
@@ -182,7 +179,7 @@ public class DetailsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Movie> call, Throwable t) {
-                Toast.makeText(DetailsActivity.this, "Failed to get movies details on server. Please check your internet connection.", Toast.LENGTH_LONG).show();
+                Toast.makeText(DetailsActivity.this, getString(R.string.connection_error_movie_details), Toast.LENGTH_LONG).show();
 
             }
         });

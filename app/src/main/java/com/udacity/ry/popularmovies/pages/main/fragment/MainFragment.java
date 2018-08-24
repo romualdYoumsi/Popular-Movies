@@ -4,17 +4,13 @@ package com.udacity.ry.popularmovies.pages.main.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.Preference;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,19 +28,10 @@ import com.udacity.ry.popularmovies.asyncTask.DiscoverMoviesTask;
 import com.udacity.ry.popularmovies.interfaces.OnDiscoverMoviesTaskCompleted;
 import com.udacity.ry.popularmovies.model.RYMovie;
 import com.udacity.ry.popularmovies.pages.details.DetailsActivity;
-import com.udacity.ry.popularmovies.remote.ApiUtils;
 import com.udacity.ry.popularmovies.remote.model.Discover;
 import com.udacity.ry.popularmovies.remote.model.Movie;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 
 /**
@@ -70,17 +57,6 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
     public MainFragment() {
         // Required empty public constructor
 //        Log.e(TAG, "MainFragment:");
-
-//        mRYMovies.add(new RYMovie(0, "kmcqlZGaSh20zpTbuoF0Cdn07dT.jpg", "Movie 0 Movie 0 Movie 0", "2020-05-24", 5.6));
-//        mRYMovies.add(new RYMovie(1, "kmcqlZGaSh20zpTbuoF0Cdn07dT.jpg", "Movie 1", "2019-12-29", 5.6));
-//        mRYMovies.add(new RYMovie(2, "kmcqlZGaSh20zpTbuoF0Cdn07dT.jpg", "Movie 2", "2019-10-09", 5.6));
-//        mRYMovies.add(new RYMovie(3, "kmcqlZGaSh20zpTbuoF0Cdn07dT.jpg", "Movie 3", "2019-09-15", 5.6));
-//        mRYMovies.add(new RYMovie(4, "kmcqlZGaSh20zpTbuoF0Cdn07dT.jpg", "Movie 4", "2019-04-30", 5.6));
-//        mRYMovies.add(new RYMovie(5, "kmcqlZGaSh20zpTbuoF0Cdn07dT.jpg", "Movie 5 Movie 5 Movie 5 Movie 5", "2019-02-17", 5.6));
-//        mRYMovies.add(new RYMovie(6, "kmcqlZGaSh20zpTbuoF0Cdn07dT.jpg", "Movie 6", "2018-11-21", 5.6));
-//        mRYMovies.add(new RYMovie(7, "kmcqlZGaSh20zpTbuoF0Cdn07dT.jpg", "Movie 7", "2018-11-08", 5.6));
-//        mRYMovies.add(new RYMovie(8, "kmcqlZGaSh20zpTbuoF0Cdn07dT.jpg", "Movie 8", "2018-05-31", 5.6));
-//        mRYMovies.add(new RYMovie(9, "kmcqlZGaSh20zpTbuoF0Cdn07dT.jpg", "Movie 9", "2018-04-28", 5.6));
     }
 
     @Override
@@ -107,7 +83,6 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
 
         mRYMovieAdapter = new RYMovieAdapter(getActivity(), mRYMovies);
 
-//        mGridView.setOnItemClickListener(myOnItemClickListener);
         mGridView.setAdapter(mRYMovieAdapter);
         mGridView.setOnScrollListener(new GridView.OnScrollListener() {
             @Override
@@ -127,11 +102,25 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
                 }
                 else if (!isPhoneConnected()) {
 
-                    Toast.makeText(getContext(), getContext().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getContext().getString(R.string.connection_error_discover_movies), Toast.LENGTH_LONG).show();
 
 //            show error message TextView
                     mErrorTV.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                RYMovie ryMovie = (RYMovie) parent.getItemAtPosition(position);
+//                Log.e(TAG, "onItemClick: position="+position+" title="+ryMovie.getTitle()+" Vote_average="+ryMovie.getVote_average()+" Release_date="+ryMovie.getRelease_date());
+
+                Intent i = new Intent(getContext(), DetailsActivity.class);
+
+                //Sending movie item data to DetailsActivity
+                i.putExtra("movie_item", ryMovie);
+
+                getContext().startActivity(i);
             }
         });
 
@@ -142,7 +131,7 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
         }
         else if (!isPhoneConnected()) {
 
-            Toast.makeText(getContext(), getContext().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), getContext().getString(R.string.connection_error_discover_movies), Toast.LENGTH_LONG).show();
 
 //            show error message TextView
             mErrorTV.setVisibility(View.VISIBLE);
@@ -204,7 +193,7 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
         }
         else if (!isPhoneConnected()) {
 
-            Toast.makeText(getContext(), getContext().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), getContext().getString(R.string.connection_error_discover_movies), Toast.LENGTH_LONG).show();
 
 //            show error message TextView
             mErrorTV.setVisibility(View.VISIBLE);
@@ -226,21 +215,6 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
         return (activeNetwork != null) &&
                 activeNetwork.isConnectedOrConnecting();
     }
-
-    AdapterView.OnItemClickListener myOnItemClickListener = new AdapterView.OnItemClickListener(){
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long id) {
-            RYMovie ryMovie = (RYMovie)parent.getItemAtPosition(position);
-
-                Log.e(TAG, "onItemClick: position="+position+" title="+ryMovie.getTitle()+" Vote_average="+ryMovie.getVote_average()+" Release_date="+ryMovie.getRelease_date());
-
-            Toast.makeText(getContext(),
-                    ryMovie.getTitle(),
-                    Toast.LENGTH_LONG).show();
-
-        }};
 
     private void executeDiscovering() {
 
@@ -296,7 +270,7 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
 
         }
         else {
-            Toast.makeText(getContext(), getContext().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), getContext().getString(R.string.connection_error_discover_movies), Toast.LENGTH_LONG).show();
 
 //            show error message TextView
             mErrorTV.setVisibility(View.VISIBLE);
