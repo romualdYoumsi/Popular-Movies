@@ -1,10 +1,13 @@
 package com.udacity.ry.popularmovies.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by netserve on 04/08/2018.
  */
 
-public class RYMovie {
+public class RYMovie implements Parcelable {
     private long id;
     private String poster_path;
     private String title;
@@ -70,4 +73,40 @@ public class RYMovie {
     public void setOverview(String overview) {
         this.overview = overview;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(id);
+        parcel.writeString(poster_path);
+        parcel.writeString(title);
+        parcel.writeString(release_date);
+        parcel.writeDouble(vote_average);
+        parcel.writeString(overview);
+    }
+    private RYMovie(Parcel in) {
+        id = in.readLong();
+        poster_path = in.readString();
+        title = in.readString();
+        release_date = in.readString();
+        vote_average = in.readDouble();
+        overview = in.readString();
+    }
+    public static final Parcelable.Creator<RYMovie> CREATOR
+            = new Parcelable.Creator<RYMovie>() {
+
+        @Override
+        public RYMovie createFromParcel(Parcel in) {
+            return new RYMovie(in);
+        }
+
+        @Override
+        public RYMovie[] newArray(int size) {
+            return new RYMovie[size];
+        }
+    };
 }

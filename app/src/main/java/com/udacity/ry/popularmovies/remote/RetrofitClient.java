@@ -40,6 +40,7 @@ public class RetrofitClient {
                             Request original = chain.request();
                             HttpUrl originalHttpUrl = original.url();
 
+//                            Log.e(TAG, "intercept: "+originalHttpUrl.toString());
 //                            Adding TheMovieDB API KEY to all queries
                             HttpUrl url = originalHttpUrl.newBuilder()
                                     .addQueryParameter(ApiUtils.api_key, ApiUtils.API_KEY)

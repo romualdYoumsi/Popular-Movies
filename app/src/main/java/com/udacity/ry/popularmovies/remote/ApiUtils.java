@@ -1,16 +1,18 @@
 package com.udacity.ry.popularmovies.remote;
 
+import com.udacity.ry.popularmovies.BuildConfig;
+
 /**
  * Created by netserve on 03/08/2018.
  */
 
 public class ApiUtils {
-    public static final String MOVIES_BASE_URL = "http://api.themoviedb.org/3/";
+    public static final String MOVIES_BASE_URL = "https://api.themoviedb.org/3/";
     public static final String MOVIES_POSTER_BASE_URL = "https://image.tmdb.org/t/p/w185/";
     public static final String MOVIES_BACKDROP_PATH_BASE_URL = "https://image.tmdb.org/t/p/w780/";
 
 //    Movies DB api key
-    public static final String API_KEY = "cd68a278879a00b6d3f7e881ac27df50";
+    public static final String API_KEY = BuildConfig.API_KEY;
 
 //    body query properties
     public static final String api_key = "api_key";

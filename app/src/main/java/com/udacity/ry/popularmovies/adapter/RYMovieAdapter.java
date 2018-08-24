@@ -26,7 +26,7 @@ import java.util.List;
  * Created by netserve on 08/08/2018.
  */
 
-public class RYMovieAdapter extends ArrayAdapter<RYMovie> implements AdapterView.OnItemClickListener {
+public class RYMovieAdapter extends ArrayAdapter<RYMovie> {
     private static final String TAG = RYMovieAdapter.class.getSimpleName();
 
     public RYMovieAdapter(Context context, List<RYMovie> movies) {
@@ -43,7 +43,7 @@ public class RYMovieAdapter extends ArrayAdapter<RYMovie> implements AdapterView
         }
 
         RelativeLayout cardMovie = (RelativeLayout) convertView.findViewById(R.id.card_view_content);
-        cardMovie.setOnClickListener(new View.OnClickListener() {
+        /*cardMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Log.e(TAG, "onItemClick: position="+position+" title="+ryMovie.getTitle()+" Vote_average="+ryMovie.getVote_average()+" Release_date="+ryMovie.getRelease_date());
@@ -54,7 +54,7 @@ public class RYMovieAdapter extends ArrayAdapter<RYMovie> implements AdapterView
 
                 getContext().startActivity(i);
             }
-        });
+        });*/
 
 //        set the value of views
         ImageView posterView = (ImageView) convertView.findViewById(R.id.poster_iv);
@@ -73,6 +73,7 @@ public class RYMovieAdapter extends ArrayAdapter<RYMovie> implements AdapterView
         return convertView;
     }
 
+    /*
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         RYMovie item = getItem(position);
@@ -83,5 +84,5 @@ public class RYMovieAdapter extends ArrayAdapter<RYMovie> implements AdapterView
         i.putExtra("movie_id", item.getId());
 
         getContext().startActivity(i);
-    }
+    }*/
 }

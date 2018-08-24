@@ -5,7 +5,6 @@ import com.udacity.ry.popularmovies.remote.model.Movie;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -16,10 +15,10 @@ import retrofit2.http.Query;
 public interface MoviesServicesRemote {
 
     //  Getting the discover movies from the movie database
-    @GET("discover/movie")
-    Call<Discover> discoverMovie(@Query(ApiUtils.page) int page,
-                                 @Query(ApiUtils.language) String language,
-                                 @Query(ApiUtils.sort_by) String sort_by);
+    @GET("movie/{sortOrder}")
+    Call<Discover> discoverMovie(@Path("sortOrder") String sort_by,
+                                 @Query(ApiUtils.page) int page,
+                                 @Query(ApiUtils.language) String language);
 
     //  Getting the details of a movie from the movie database
     @GET("movie/{movieId}")
