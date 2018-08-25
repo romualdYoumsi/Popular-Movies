@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:title="toot"
+                app:title=""
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
         </net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout>
 

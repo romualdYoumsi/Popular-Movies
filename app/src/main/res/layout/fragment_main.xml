@@ -44,7 +44,7 @@
             android:id="@+id/error_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/connection_error"
+            android:text="@string/connection_error_discover_movies"
             android:gravity="center_horizontal"
             android:visibility="gone"/>
     </LinearLayout>

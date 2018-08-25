@@ -26,5 +26,6 @@
     <string name="production_company_ies">Société(s) de production</string>
     <string name="production_country_ies">Pays de production</string>
     <string name="spoken_language_s">Langue(s) parlée(s)</string>
-    <string name="connection_error">Impossible de recupérer des films sur le serveur. S\'il vous plait, vérifiez votre connexion internet.</string>
+    <string name="connection_error_discover_movies">Impossible de recupérer des films sur le serveur. S\'il vous plait, vérifiez votre connexion internet.</string>
+    <string name="connection_error_movie_details">Impossible d\'obtenir les détails du film sur le serveur. S\'il vous plait, vérifiez votre connexion internet.</string>
 </resources>

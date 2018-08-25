@@ -39,10 +39,10 @@
     <string name="pref_language_key" translatable="false">language</string>
 
     <!-- Value in SharedPreferences for sort order most popular option -->
-    <string name="pref_sort_order_most_popular" translatable="false">popularity.desc</string>
+    <string name="pref_sort_order_most_popular" translatable="false">popular</string>
 
     <!-- Value in SharedPreferences for sort order top rated option -->
-    <string name="pref_sort_order_top_rated" translatable="false">vote_count.desc</string>
+    <string name="pref_sort_order_top_rated" translatable="false">top_rated</string>
 
     <!-- Value in SharedPreferences for language english option -->
     <string name="pref_language_en" translatable="false">en</string>
@@ -65,5 +65,6 @@
     <string name="production_company_ies">Production company(ies)</string>
     <string name="production_country_ies">Production country(ies)</string>
     <string name="spoken_language_s">Spoken language(s)</string>
-    <string name="connection_error">Failed to get movies on server. Please check your internet connection.</string>
+    <string name="connection_error_discover_movies">Failed to get movies on server. Please check your internet connection.</string>
+    <string name="connection_error_movie_details">Failed to get movies details on server. Please check your internet connection.</string>
 </resources>
