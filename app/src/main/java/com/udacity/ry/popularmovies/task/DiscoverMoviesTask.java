@@ -1,11 +1,8 @@
-package com.udacity.ry.popularmovies.asyncTask;
+package com.udacity.ry.popularmovies.task;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.udacity.ry.popularmovies.R;
 import com.udacity.ry.popularmovies.interfaces.OnDiscoverMoviesTaskCompleted;
 import com.udacity.ry.popularmovies.remote.ApiUtils;
 import com.udacity.ry.popularmovies.remote.model.Discover;

@@ -92,24 +92,8 @@ public class DetailsActivity extends AppCompatActivity {
             fetchMovieDetailsData(movieItem.getId());
         }
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    } */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -121,16 +105,6 @@ public class DetailsActivity extends AppCompatActivity {
             onBackPressed();
             return true;
         }
-        /*
-        //if the menu id correspond to settings, go to settings activity
-        if (id == R.id.action_settings) {
-//            Log.e(TAG, "onOptionsItemSelected: action_settings");
-
-            Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
-            startActivity(startSettingsActivity);
-
-            return true;
-        }*/
 
         return super.onOptionsItemSelected(item);
     }

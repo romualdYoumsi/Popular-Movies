@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.udacity.ry.popularmovies.R;
 import com.udacity.ry.popularmovies.adapter.RYMovieAdapter;
-import com.udacity.ry.popularmovies.asyncTask.DiscoverMoviesTask;
+import com.udacity.ry.popularmovies.task.DiscoverMoviesTask;
 import com.udacity.ry.popularmovies.interfaces.OnDiscoverMoviesTaskCompleted;
 import com.udacity.ry.popularmovies.model.RYMovie;
 import com.udacity.ry.popularmovies.pages.details.DetailsActivity;
