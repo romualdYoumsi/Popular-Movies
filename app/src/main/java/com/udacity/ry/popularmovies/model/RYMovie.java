@@ -14,16 +14,19 @@ public class RYMovie implements Parcelable {
     private String release_date;
     private double vote_average;
     private String overview;
+//    0 for non fovorite and 1 for favorite
+    private int favorite;
 
     public RYMovie() {
     }
 
-    public RYMovie(long id, String poster_path, String title, String release_date, double vote_average) {
+    public RYMovie(long id, String poster_path, String title, String release_date, double vote_average, int favorite) {
         this.id = id;
         this.poster_path = poster_path;
         this.title = title;
         this.release_date = release_date;
         this.vote_average = vote_average;
+        this.favorite = favorite;
     }
 
     public long getId() {
@@ -70,6 +73,14 @@ public class RYMovie implements Parcelable {
         return overview;
     }
 
+    public int getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
+    }
+
     public void setOverview(String overview) {
         this.overview = overview;
     }
@@ -87,6 +98,7 @@ public class RYMovie implements Parcelable {
         parcel.writeString(release_date);
         parcel.writeDouble(vote_average);
         parcel.writeString(overview);
+        parcel.writeInt(favorite);
     }
     private RYMovie(Parcel in) {
         id = in.readLong();
@@ -95,6 +107,7 @@ public class RYMovie implements Parcelable {
         release_date = in.readString();
         vote_average = in.readDouble();
         overview = in.readString();
+        favorite = in.readInt();
     }
     public static final Parcelable.Creator<RYMovie> CREATOR
             = new Parcelable.Creator<RYMovie>() {

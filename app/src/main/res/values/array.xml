@@ -5,11 +5,13 @@
     <string-array name="pref_sort_order_options">
         <item>@string/pref_sort_order_label_most_popular</item>
         <item>@string/pref_sort_order_label_top_rated</item>
+        <item>@string/pref_sort_order_label_favorites</item>
     </string-array>
 
     <string-array name="pref_sort_order_values">
         <item>@string/pref_sort_order_most_popular</item>
         <item>@string/pref_sort_order_top_rated</item>
+        <item>@string/pref_sort_order_favorites</item>
     </string-array>
 
     <!--Language option label-->

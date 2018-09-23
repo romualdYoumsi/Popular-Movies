@@ -22,6 +22,17 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:scaleType="fitXY" />
 
+        <ImageView
+            android:id="@+id/iv_favourite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            android:padding="6dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_favorite_border_white_24dp"/>
+
         <TextView
             android:id="@+id/title_tv"
             android:layout_width="match_parent"
@@ -48,6 +59,15 @@
             android:textSize="@dimen/songs_count"
             tools:text="2018-08-10" />
 
+        <TextView
+            android:id="@+id/rating_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/rating_rb"
+            android:layout_below="@id/title_tv"
+            android:layout_alignTop="@+id/rating_rb"
+            tools:text="8,5"
+            tools:textColor="@android:color/white"/>
         <RatingBar
             android:id="@+id/rating_rb"
             style="@style/Widget.AppCompat.RatingBar.Small"
@@ -56,12 +76,26 @@
             android:layout_alignParentEnd="true"
             android:layout_below="@id/title_tv"
             android:isIndicator="true"
-            android:numStars="5"
+            android:numStars="1"
+            android:rating="1"
+            android:stepSize="1"
             android:progressTint="@color/color_rating"
-            android:rating="2.3"
             android:secondaryProgressTint="@android:color/transparent"
-            android:stepSize="0.1"
             tools:layout_height="wrap_content" />
+        <!--<RatingBar-->
+            <!--android:id="@+id/rating_rb"-->
+            <!--style="@style/Widget.AppCompat.RatingBar.Small"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_below="@id/title_tv"-->
+            <!--android:isIndicator="true"-->
+            <!--android:numStars="5"-->
+            <!--android:progressTint="@color/color_rating"-->
+            <!--android:rating="2.3"-->
+            <!--android:secondaryProgressTint="@android:color/transparent"-->
+            <!--android:stepSize="0.1"-->
+            <!--tools:layout_height="wrap_content" />-->
 
     </RelativeLayout>
 

@@ -1,8 +1,9 @@
 package com.udacity.ry.popularmovies.pages.main.fragment;
 
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -24,14 +25,17 @@ import android.widget.Toast;
 
 import com.udacity.ry.popularmovies.R;
 import com.udacity.ry.popularmovies.adapter.RYMovieAdapter;
-import com.udacity.ry.popularmovies.task.DiscoverMoviesTask;
+import com.udacity.ry.popularmovies.database.AppDataBase;
+import com.udacity.ry.popularmovies.database.MovieEntry;
 import com.udacity.ry.popularmovies.interfaces.OnDiscoverMoviesTaskCompleted;
 import com.udacity.ry.popularmovies.model.RYMovie;
-import com.udacity.ry.popularmovies.pages.details.DetailsActivity;
+import com.udacity.ry.popularmovies.pages.main.viewmodel.MainViewModel;
 import com.udacity.ry.popularmovies.remote.model.Discover;
 import com.udacity.ry.popularmovies.remote.model.Movie;
+import com.udacity.ry.popularmovies.task.DiscoverMoviesTask;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -54,6 +58,9 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
 
     private DiscoverMoviesTask mDiscoverMoviesTask = null;
 
+    // Member variable for the Database
+    private AppDataBase mDb;
+
     public MainFragment() {
         // Required empty public constructor
 //        Log.e(TAG, "MainFragment:");
@@ -68,6 +75,8 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
             firstVisiblePositionGV = savedInstanceState.getInt("firstVisiblePositionGV");
 //            Log.e(TAG, "onCreate: savedInstanceState not null firstVisiblePositionGV="+firstVisiblePositionGV);
         }
+
+        mDb = AppDataBase.getsInstance(getContext().getApplicationContext());
     }
 
     @Override
@@ -97,24 +106,20 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
                 int itemsCount = absListView.getAdapter().getCount();
 
 //                Log.e(TAG, "onScroll: lastPosition="+lastPosition+" itemsCount="+itemsCount+" isConnected="+isConnected );
-                if (lastPosition > 0 && (lastPosition+1) == itemsCount && isPhoneConnected()) {
+                if (lastPosition > 0 && (lastPosition + 1) == itemsCount) {
                     executeDiscovering();
-                }
-                else if (!isPhoneConnected()) {
-
-                    Toast.makeText(getContext(), getContext().getString(R.string.connection_error_discover_movies), Toast.LENGTH_LONG).show();
-
-//            show error message TextView
-                    mErrorTV.setVisibility(View.VISIBLE);
                 }
             }
         });
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 RYMovie ryMovie = (RYMovie) parent.getItemAtPosition(position);
 //                Log.e(TAG, "onItemClick: position="+position+" title="+ryMovie.getTitle()+" Vote_average="+ryMovie.getVote_average()+" Release_date="+ryMovie.getRelease_date());
 
+                if (view.getId() == R.id.iv_favourite) {
+                    Log.e(TAG, "onItemClick: favourite click");
+                }
                 Intent i = new Intent(getContext(), DetailsActivity.class);
 
                 //Sending movie item data to DetailsActivity
@@ -122,20 +127,12 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
 
                 getContext().startActivity(i);
             }
-        });
+        });*/
 
         setUpSharedPreference();
 
-        if (isPhoneConnected()) {
-            executeDiscovering();
-        }
-        else if (!isPhoneConnected()) {
+        executeDiscovering();
 
-            Toast.makeText(getContext(), getContext().getString(R.string.connection_error_discover_movies), Toast.LENGTH_LONG).show();
-
-//            show error message TextView
-            mErrorTV.setVisibility(View.VISIBLE);
-        }
         return rootView;
     }
 
@@ -153,7 +150,7 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
 
         if (savedInstanceState != null) {
             firstVisiblePositionGV = savedInstanceState.getInt("firstVisiblePositionGV");
-            Log.e(TAG, "onActivityCreated: savedInstanceState not null firstVisiblePositionGV="+firstVisiblePositionGV);
+            Log.e(TAG, "onActivityCreated: savedInstanceState not null firstVisiblePositionGV=" + firstVisiblePositionGV);
 
         }
         super.onActivityCreated(savedInstanceState);
@@ -163,7 +160,7 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             firstVisiblePositionGV = savedInstanceState.getInt("firstVisiblePositionGV");
-            Log.e(TAG, "onViewStateRestored: savedInstanceState not null firstVisiblePositionGV="+firstVisiblePositionGV);
+            Log.e(TAG, "onViewStateRestored: savedInstanceState not null firstVisiblePositionGV=" + firstVisiblePositionGV);
 
         }
         super.onViewStateRestored(savedInstanceState);
@@ -186,17 +183,10 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
         mRYMovieAdapter.clear();
 
 //        fetch movies on server
-        if (mDiscoverMoviesTask == null && isPhoneConnected()) {
+        if (mDiscoverMoviesTask == null) {
 //            reinitialisation of discover page
             movieListPage = 1;
             executeDiscovering();
-        }
-        else if (!isPhoneConnected()) {
-
-            Toast.makeText(getContext(), getContext().getString(R.string.connection_error_discover_movies), Toast.LENGTH_LONG).show();
-
-//            show error message TextView
-            mErrorTV.setVisibility(View.VISIBLE);
         }
     }
 
@@ -208,7 +198,7 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
 
     private boolean isPhoneConnected() {
         ConnectivityManager cm =
-                (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
@@ -218,24 +208,70 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
 
     private void executeDiscovering() {
 
-//            show progressBar
-//            hide error message TextView
-        mErrorTV.setVisibility(View.GONE);
-        mProgressBar.setVisibility(View.VISIBLE);
-
 //        Getting the sharedPreference value
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         String sort = sharedPreferences.getString(getContext().getString(R.string.pref_sort_order_key), getContext().getString(R.string.pref_sort_order_most_popular));
         String language = sharedPreferences.getString(getContext().getString(R.string.pref_language_key), getContext().getString(R.string.pref_language_fr));
 
-        if (mDiscoverMoviesTask == null) {
-            mDiscoverMoviesTask = new DiscoverMoviesTask(MainFragment.this, movieListPage, sort, language);
-            mDiscoverMoviesTask.execute();
+//        Log.e(TAG, "executeDiscovering: sort=" + sort+" count="+mRYMovieAdapter.getCount());
+
+        if (sort.equals(getString(R.string.pref_sort_order_favorites)) && mRYMovieAdapter.getCount() == 0) {
+            loadLocalMovies();
+        } else if (!sort.equals(getString(R.string.pref_sort_order_favorites))){
+//            show progressBar
+//            hide error message TextView
+            mErrorTV.setVisibility(View.GONE);
+            mProgressBar.setVisibility(View.VISIBLE);
+
+            if (!isPhoneConnected()) {
+                Toast.makeText(getContext(), getContext().getString(R.string.connection_error_discover_movies), Toast.LENGTH_LONG).show();
+
+//            show error message TextView
+                mErrorTV.setVisibility(View.VISIBLE);
+                return;
+            }
+            if (mDiscoverMoviesTask == null) {
+                mDiscoverMoviesTask = new DiscoverMoviesTask(MainFragment.this, movieListPage, sort, language);
+                mDiscoverMoviesTask.execute();
 
 //            increment page count
-            movieListPage++;
-            mDiscoverMoviesTask = null;
+                movieListPage++;
+                mDiscoverMoviesTask = null;
+            }
         }
+
+    }
+
+    private void loadLocalMovies() {
+        final MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        viewModel.getMovieEntries().observe(this, new Observer<List<MovieEntry>>() {
+            @Override
+            public void onChanged(@Nullable List<MovieEntry> movieEntries) {
+                Log.d(TAG, "Updating list of tasks from LiveData in ViewModel");
+
+//                Getting the sharedPreference value
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                String sort = sharedPreferences.getString(getContext().getString(R.string.pref_sort_order_key), getContext().getString(R.string.pref_sort_order_most_popular));
+//                load local data movie if sort order equal to 'favorites'
+                if (sort.equals(getString(R.string.pref_sort_order_favorites))) {
+                    applyLocalMovies(movieEntries);
+                }
+            }
+        });
+    }
+
+    private void applyLocalMovies(List<MovieEntry> movieEntries) {
+        ArrayList<RYMovie> movieArrayList = new ArrayList<>();
+        for (int i = 0; i < movieEntries.size(); i++) {
+            MovieEntry movieEntry = movieEntries.get(i);
+
+            RYMovie ryMovie = new RYMovie(movieEntry.getId(), movieEntry.getPoster_path(), movieEntry.getTitle(), movieEntry.getRelease_date(), movieEntry.getVote_average(), 1);
+            movieArrayList.add(ryMovie);
+        }
+        mRYMovieAdapter.clear();
+        mRYMovieAdapter.addAll(movieArrayList);
+
+        mDiscoverMoviesTask = null;
     }
 
     @Override
@@ -243,12 +279,12 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
 
 //        if there is discover movies
         if (discoveredMovies != null) {
-            Log.e(TAG, "DiscoverMoviesTask:onPostExecute: discover.getResults().size="+discoveredMovies.getResults().size());
+            Log.e(TAG, "DiscoverMoviesTask:onPostExecute: discover.getResults().size=" + discoveredMovies.getResults().size());
             ArrayList<RYMovie> movieArrayList = new ArrayList<>();
 
             for (int i = 0; i < discoveredMovies.getResults().size(); i++) {
                 Movie movieItem = discoveredMovies.getResults().get(i);
-                RYMovie ryMovie = new RYMovie(movieItem.getId(), movieItem.getPoster_path(), movieItem.getTitle(), movieItem.getRelease_date(), movieItem.getVote_average());
+                RYMovie ryMovie = new RYMovie(movieItem.getId(), movieItem.getPoster_path(), movieItem.getTitle(), movieItem.getRelease_date(), movieItem.getVote_average(), 0);
                 movieArrayList.add(ryMovie);
             }
 
@@ -259,7 +295,7 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
 
 //            scroll GridView to last position after phone rotation
             if (firstVisiblePositionGV > 0) {
-                Log.e(TAG, "DiscoverMoviesTask:onPostExecute firstVisiblePositionGV="+firstVisiblePositionGV);
+                Log.e(TAG, "DiscoverMoviesTask:onPostExecute firstVisiblePositionGV=" + firstVisiblePositionGV);
 //                mGridView.smoothScrollToPosition(firstVisiblePositionGV);
                 mGridView.setSelection(firstVisiblePositionGV);
             } else {
@@ -268,8 +304,7 @@ public class MainFragment extends Fragment implements SharedPreferences.OnShared
                 mErrorTV.setVisibility(View.VISIBLE);
             }
 
-        }
-        else {
+        } else {
             Toast.makeText(getContext(), getContext().getString(R.string.connection_error_discover_movies), Toast.LENGTH_LONG).show();
 
 //            show error message TextView

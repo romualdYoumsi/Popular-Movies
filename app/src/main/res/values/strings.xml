@@ -28,6 +28,9 @@
     <!-- Label for imperial option in temperature unit preference -->
     <string name="pref_sort_order_label_top_rated">Top rated</string>
 
+    <!-- Label for favorites movies -->
+    <string name="pref_sort_order_label_favorites">Favorites</string>
+
     <!-- Label for language option in preference -->
     <string name="pref_language_label_en" translatable="false">English</string>
     <string name="pref_language_label_fr" translatable="false">Français</string>
@@ -44,6 +47,9 @@
     <!-- Value in SharedPreferences for sort order top rated option -->
     <string name="pref_sort_order_top_rated" translatable="false">top_rated</string>
 
+    <!-- Value in SharedPreferences for sort order top rated option -->
+    <string name="pref_sort_order_favorites" translatable="false">favorites</string>
+
     <!-- Value in SharedPreferences for language english option -->
     <string name="pref_language_en" translatable="false">en</string>
 
@@ -54,6 +60,7 @@
 
     <!--Translateable strings-->
     <string name="original_title">Original title</string>
+    <string name="trailers">Trailers</string>
     <string name="release_date">Release date</string>
     <string name="vote_average">Vote average</string>
     <string name="genres">Genres</string>
@@ -67,4 +74,5 @@
     <string name="spoken_language_s">Spoken language(s)</string>
     <string name="connection_error_discover_movies">Failed to get movies on server. Please check your internet connection.</string>
     <string name="connection_error_movie_details">Failed to get movies details on server. Please check your internet connection.</string>
+    <string name="user_reviews">User Reviews</string>
 </resources>

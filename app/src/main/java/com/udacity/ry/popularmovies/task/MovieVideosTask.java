@@ -3,10 +3,11 @@ package com.udacity.ry.popularmovies.task;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.udacity.ry.popularmovies.database.AppDataBase;
+import com.udacity.ry.popularmovies.interfaces.MovieVideosListener;
 import com.udacity.ry.popularmovies.interfaces.OnDiscoverMoviesTaskCompleted;
 import com.udacity.ry.popularmovies.remote.ApiUtils;
 import com.udacity.ry.popularmovies.remote.model.Discover;
+import com.udacity.ry.popularmovies.remote.model.Videos;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,40 +18,35 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 /**
- * Created by netserve on 21/08/2018.
+ * Created by netserve on 08/09/2018.
  */
 
-
-//    Discover Movies async task
-public class DiscoverMoviesTask extends AsyncTask<Void, Void, Discover> {
+public class MovieVideosTask extends AsyncTask<Void, Void, Videos> {
     private static final String TAG = DiscoverMoviesTask.class.getSimpleName();
 
-    private OnDiscoverMoviesTaskCompleted taskCompleted;
+    private MovieVideosListener taskCompleted;
 
-    private int pageSize;
-    private String sort;
+    private long movieId;
     private String language;
 
-    public DiscoverMoviesTask(OnDiscoverMoviesTaskCompleted activityContext, int pageSize, String sort, String language) {
+    public MovieVideosTask(MovieVideosListener activityContext, long movieId, String language) {
         this.taskCompleted = activityContext;
 
-        this.pageSize = pageSize;
-        this.sort = sort;
+        this.movieId = movieId;
         this.language = language;
-
     }
 
     @Override
-    protected Discover doInBackground(Void... voids) {
+    protected Videos doInBackground(Void... voids) {
 //        Requesting for movies to the movie db
 
-        Call<Discover> call = ApiUtils.getMoviesService().discoverMovie(sort, pageSize, language);
+        Call<Videos> call = ApiUtils.getMoviesService().movieVideos(movieId, language);
         try {
-            Response<Discover> response = call.execute();
+            Response<Videos> response = call.execute();
             if (response.isSuccessful()) {
-                Discover discover = response.body();
-                Log.e(TAG, "DiscoverMoviesTask:doInBackground: discover.getResults().size="+discover.getResults().size());
-                return discover;
+                Videos videos = response.body();
+                Log.e(TAG, "DiscoverMoviesTask:doInBackground: discover.getResults().size="+videos.getResults().size());
+                return videos;
             } else {
                 String error = null;
                 try {
@@ -76,9 +72,9 @@ public class DiscoverMoviesTask extends AsyncTask<Void, Void, Discover> {
     }
 
     @Override
-    protected void onPostExecute(Discover discover) {
+    protected void onPostExecute(Videos videos) {
 //        super.onPostExecute(discover);
 
-        this.taskCompleted.onTaskCompleted(discover);
+        this.taskCompleted.onMovieVideosTaskCompleted(videos);
     }
 }

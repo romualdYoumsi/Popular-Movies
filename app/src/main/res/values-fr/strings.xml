@@ -13,8 +13,12 @@
     <!-- Label for imperial option in temperature unit preference -->
     <string name="pref_sort_order_label_top_rated">Top évalué</string>
 
+    <!-- Label for imperial option in temperature unit preference -->
+    <string name="pref_sort_order_label_favorites">Favoris</string>
+
     <!--Translateable strings-->
     <string name="original_title">Titre original</string>
+    <string name="trailers">Bandes annonces</string>
     <string name="release_date">Date de sortie</string>
     <string name="vote_average">Moyenne de vote</string>
     <string name="genres">Genres</string>
@@ -24,8 +28,9 @@
     <string name="original_language">Langue originale</string>
     <string name="popularity">Popularité</string>
     <string name="production_company_ies">Société(s) de production</string>
-    <string name="production_country_ies">Pays de production</string>
+    <string name="production_country_ies">Pays de production</string>'
     <string name="spoken_language_s">Langue(s) parlée(s)</string>
     <string name="connection_error_discover_movies">Impossible de recupérer des films sur le serveur. S\'il vous plait, vérifiez votre connexion internet.</string>
     <string name="connection_error_movie_details">Impossible d\'obtenir les détails du film sur le serveur. S\'il vous plait, vérifiez votre connexion internet.</string>
+    <string name="user_reviews">Critiques d\'Utilisateurs</string>
 </resources>
